@@ -7,7 +7,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build src/index.js -o dist"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,8 @@
     "@actions/github": "^5.1.1",
     "glob": "^8.0.3",
     "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.34.0"
   }
 }
