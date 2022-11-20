@@ -1,0 +1,26 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+  - package-ecosystem: docker
+    directory: /test/docker/container_1
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker
+    directory: /test/docker/container_2
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker
+    directory: /test/docker/weird_dockerfile
+    schedule:
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /test/npm/npm_1
+    schedule:
+      interval: daily
+  - package-ecosystem: npm
+    directory: /test/npm/yarn_1
+    schedule:
+      interval: daily
