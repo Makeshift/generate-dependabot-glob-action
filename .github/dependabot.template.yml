@@ -1,0 +1,17 @@
+version: 2
+
+updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'daily'
+
+  - package-ecosystem: 'docker'
+    directory: '/test/docker/*/Dockerfile*'
+    schedule:
+      interval: 'weekly'
+
+  - package-ecosystem: 'npm'
+    directory: '/test/npm/*/{package-lock.json,yarn.lock}'
+    schedule:
+      interval: 'daily'

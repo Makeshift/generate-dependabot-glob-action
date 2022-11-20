@@ -1,0 +1,17 @@
+name: 'Generate Dependabot Glob'
+
+description:
+  'Creates a `dependabot.yml` file from a user-provided template by replacing instances of directory globs with an array of objects matching
+  that glob, with all the other keys copied.'
+inputs:
+  template-file:
+    description: 'Location of the file to use as template'
+    default: .github/dependabot.template.yml
+
+  follow-symbolic-links:
+    description: 'Indicates whether to follow symbolic links'
+    default: true
+
+runs:
+  using: 'node16'
+  main: 'src/index.js'

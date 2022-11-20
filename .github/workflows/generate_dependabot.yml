@@ -1,0 +1,19 @@
+name: Generate dependabot.yml
+
+on:
+  push:
+  repository_dispatch:
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      
+      - uses: actions/checkout@v3
+        
+      - name: Generate dependabot.yml
+        uses: ./
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4

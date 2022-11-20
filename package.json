@@ -1,0 +1,28 @@
+{
+  "name": "generate-dependabot-glob-action",
+  "version": "1.0.0",
+  "description": "This action creates a `dependabot.yml` file from a user-provided template by replacing instances of `directory: **/x` with an array of objects matching that glob, with the keys copied.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Makeshift/generate-dependabot-action.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Makeshift/generate-dependabot-action/issues"
+  },
+  "homepage": "https://github.com/Makeshift/generate-dependabot-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "glob": "^8.0.3",
+    "js-yaml": "^4.1.0"
+  }
+}
