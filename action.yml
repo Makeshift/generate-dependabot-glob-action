@@ -1,5 +1,9 @@
 name: 'Generate Dependabot Glob'
 
+branding:
+  icon: briefcase
+  color: orange
+
 description: 'Creates a `dependabot.yml` dynamically based on glob patterns.'
 inputs:
   template-file:
