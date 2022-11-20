@@ -91,7 +91,7 @@ jobs:
       - uses: actions/checkout@v3
         
       - name: Generate dependabot.yml
-        uses: Makeshift/generate-dependabot-glob-action@master
+        uses: Makeshift/generate-dependabot-glob-action@v1
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
