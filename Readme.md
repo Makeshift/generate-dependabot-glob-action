@@ -121,12 +121,9 @@ Done. Now, whenever you push to the repository, or manually trigger the workflow
 ## Inputs
 
 | parameter | description | required | default |
-| - | - | - | - |
+| --- | --- | --- | --- |
 | template-file | Location of the file to use as template | `false` | .github/dependabot.template.yml |
 | follow-symbolic-links | Indicates whether to follow symbolic links | `false` | true |
-
-
-
 <!-- action-docs-inputs -->
 
 <!-- action-docs-outputs -->
