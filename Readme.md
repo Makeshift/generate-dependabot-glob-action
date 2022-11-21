@@ -49,31 +49,49 @@ If these options are not sufficient, please open an issue and let me know.
 ## Quickstart
 
 ### Create a `.github/dependabot.template.yml` file
-  
+
+This is just a normal `dependabot.yml` file, but with globs/wildcards in the `directory` field.
+Note that comments will not be transferred to the generated file.
+
   ```yaml
 version: 2
 
 updates:
   - package-ecosystem: 'github-actions'
+    # No globs
     directory: '/'
     schedule:
       interval: 'daily'
 
   - package-ecosystem: 'docker'
+    # Simple globs
     directory: '/test/docker/*/Dockerfile*'
     schedule:
       interval: 'weekly'
 
   - package-ecosystem: 'npm'
+    # Simple glob + extglob
     directory: '/test/npm/*/{package-lock.json,yarn.lock}'
+    ignore:
+      - dependency-name: '*'
     schedule:
       interval: 'daily'
+
+  - package-ecosystem: 'terraform'
+    # Searches the entire tree, but only matches files with the given name
+    # This actually outputs without a leading slash, but dependabot doesn't seem to care
+    # Note the . is escaped, node-glob doesn't search hidden files by default
+    directory: '\.terraform.lock.hcl'
+    commit-message:
+      prefix: 'terraform'
+    schedule:
+      interval: 'weekly'
 
   ```
 
 ### Create a `.github/workflows/generate_dependabot.yml` file
 
-Note that this action does not create a PR or otherwise commit the generated file. You will need to do that yourself.
+The action does not create a PR or otherwise commit the generated file, so we can use another action like peter-evans/create-pull-request to do that.
 
 ```yaml
 name: Generate dependabot.yml
@@ -97,4 +115,12 @@ jobs:
         uses: peter-evans/create-pull-request@v4
 ```
 
-Done.
+Done. Now, whenever you push to the repository, or manually trigger the workflow, a PR will be created with the generated `dependabot.yml` file matching your wildcards if they've changed.
+
+<!-- action-docs-inputs -->
+
+<!-- action-docs-inputs -->
+
+<!-- action-docs-outputs -->
+
+<!-- action-docs-outputs -->

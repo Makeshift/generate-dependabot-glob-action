@@ -1,17 +1,41 @@
 version: 2
 
 updates:
-  - package-ecosystem: 'github-actions'
+  ### Test dependabot configs
+  - package-ecosystem: 'docker'
+    # Simple globs
+    directory: '/test/docker/*/Dockerfile*'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 0
+
+  - package-ecosystem: 'npm'
+    # Simple glob + extglob
+    directory: '/test/npm/*/{package-lock.json,yarn.lock}'
+    ignore:
+      - dependency-name: '*'
+    schedule:
+      interval: 'daily'
+    open-pull-requests-limit: 0
+
+  - package-ecosystem: 'terraform'
+    # Searches the entire tree, but only matches files with the given name
+    # This actually outputs without a leading slash, but dependabot doesn't seem to care
+    # Note the . is escaped, node-glob doesn't search hidden files by default
+    directory: '\.terraform.lock.hcl'
+    commit-message:
+      prefix: 'terraform'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 0
+
+  ### The actual dependabot config for this repo
+  - package-ecosystem: 'npm'
     directory: '/'
     schedule:
       interval: 'daily'
 
-  - package-ecosystem: 'docker'
-    directory: '/test/docker/*/Dockerfile*'
-    schedule:
-      interval: 'weekly'
-
-  - package-ecosystem: 'npm'
-    directory: '/test/npm/*/{package-lock.json,yarn.lock}'
+  - package-ecosystem: 'github-actions'
+    directory: '/'
     schedule:
       interval: 'daily'

@@ -1,0 +1,22 @@
+on:
+  push:
+    branches:
+      - master
+  repository_dispatch:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Do release
+        uses: Makeshift/semver-release-action@v0.1.0
+        with:
+          files: |
+            action.yml
+            dist
+            Readme.md
+          readme: Readme.md
