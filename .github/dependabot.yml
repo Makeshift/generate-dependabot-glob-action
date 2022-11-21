@@ -1,26 +1,60 @@
 version: 2
 updates:
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: daily
   - package-ecosystem: docker
     directory: /test/docker/container_1
     schedule:
       interval: weekly
+    open-pull-requests-limit: 0
   - package-ecosystem: docker
     directory: /test/docker/container_2
     schedule:
       interval: weekly
+    open-pull-requests-limit: 0
   - package-ecosystem: docker
     directory: /test/docker/weird_dockerfile
     schedule:
       interval: weekly
+    open-pull-requests-limit: 0
   - package-ecosystem: npm
     directory: /test/npm/npm_1
+    ignore:
+      - dependency-name: '*'
     schedule:
       interval: daily
+    open-pull-requests-limit: 0
   - package-ecosystem: npm
     directory: /test/npm/yarn_1
+    ignore:
+      - dependency-name: '*'
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 0
+  - package-ecosystem: terraform
+    directory: test/terraform/tf_1
+    commit-message:
+      prefix: terraform
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+  - package-ecosystem: terraform
+    directory: test/terraform/tf_2
+    commit-message:
+      prefix: terraform
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+  - package-ecosystem: terraform
+    directory: test/terraform/tf_2/modules/test
+    commit-message:
+      prefix: terraform
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 0
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: daily
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
       interval: daily
