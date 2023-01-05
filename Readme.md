@@ -40,7 +40,7 @@ const globOpts = {
   mark: true,
   matchBase: true,
   nomount: true,
-  follow: core.getInput('follow-symbolic-links') === 'true' || true
+  follow: core.getInput('follow-symbolic-links') === 'true'
 }
 ```
 
