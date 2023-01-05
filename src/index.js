@@ -31,9 +31,7 @@ function parseStringTemplate (str, obj) {
 const clone = obj => JSON.parse(JSON.stringify(obj))
 
 async function run () {
-  const { templateFile, warning } = actionOpts
-
-  const template = yaml.load(await fs.readFile(templateFile, 'utf8'))
+  const template = yaml.load(await fs.readFile(actionOpts['template-file'], 'utf8'))
   const newUpdates = []
 
   for (const entry of template.updates) {
@@ -55,7 +53,7 @@ async function run () {
   core.info(`Here's the final config (JSON): ${JSON.stringify(newUpdates)}`)
   template.updates = newUpdates
   core.info('Writing config to .github/dependabot.yml')
-  const finalString = parseStringTemplate(warning, actionOpts) + '\n' + yaml.dump(template)
+  const finalString = parseStringTemplate(actionOpts['file-header'], actionOpts) + '\n' + yaml.dump(template)
   core.info(finalString)
   await fs.writeFile('.github/dependabot.yml', finalString)
 }
