@@ -56,7 +56,7 @@ async function run () {
   template.updates = newUpdates
   core.info('Writing config to .github/dependabot.yml')
   const finalString = parseStringTemplate(warning, actionOpts) + '\n' + yaml.dump(template)
-  core.verbose(finalString)
+  core.info(finalString)
   await fs.writeFile('.github/dependabot.yml', finalString)
 }
 
