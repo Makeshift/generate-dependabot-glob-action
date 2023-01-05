@@ -21,7 +21,7 @@ const globOpts = {
 }
 
 function parseStringTemplate (str, obj) {
-  const parts = str.split(/\$\{(?!\d)[\wæøåÆØÅ]*\}/)
+  const parts = str.split(/\$\{(?!\d)[\wæøåÆØÅ-]*\}/)
   const args = str.match(/[^{}]+(?=})/g) || []
   const parameters = args.map(argument => obj[argument] || (obj[argument] === undefined ? '' : obj[argument]))
   return String.raw({ raw: parts }, ...parameters)
