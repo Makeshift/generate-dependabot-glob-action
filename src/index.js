@@ -42,7 +42,7 @@ async function run () {
     const matchingFiles = await glob(entry.directory, globOpts)
     core.info(`Found ${matchingFiles.length} files matching ${entry.directory}`)
     const matchingDirs = new Set(matchingFiles.map(file => path.dirname(file)))
-    core.info(`Found ${matchingDirs.length} directories matching ${entry.directory}`)
+    core.info(`Found ${matchingDirs.size} directories matching ${entry.directory}`)
 
     for (const dir of matchingDirs) {
       core.info(`Creating entry for ${dir} with ecosystem ${entry['package-ecosystem']}`)
@@ -52,10 +52,12 @@ async function run () {
     }
   }
 
-  core.info(`Here's the final config: ${JSON.stringify(newUpdates)}`)
+  core.info(`Here's the final config (JSON): ${JSON.stringify(newUpdates)}`)
   template.updates = newUpdates
   core.info('Writing config to .github/dependabot.yml')
-  await fs.writeFile('.github/dependabot.yml', parseStringTemplate(warning, actionOpts) + '\n' + yaml.dump(template))
+  const finalString = parseStringTemplate(warning, actionOpts) + '\n' + yaml.dump(template)
+  core.verbose(finalString)
+  await fs.writeFile('.github/dependabot.yml', finalString)
 }
 
 run().catch(error => {
